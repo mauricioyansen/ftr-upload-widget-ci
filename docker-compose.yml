@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=server
+    volumes:
+      - db:/var/lib/postgresql/data
+  app:
+    build: .
+    container_name: widget-server
+    ports:
+      - 3000:3333
+    environment:
+      - CLOUDFLARE_ACCESS_KEY_ID=#
+      - CLOUDFLARE_SECRET_ACCESS_KEY=#
+      - CLOUDFLARE_BUCKET=#
+      - CLOUDFLARE_ACCOUNT_ID=#
+      - CLOUDFLARE_PUBLIC_URL=http://localhost.com
+
+volumes:
+  db:
